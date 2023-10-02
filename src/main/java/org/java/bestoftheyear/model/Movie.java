@@ -1,10 +1,10 @@
 package org.java.bestoftheyear.model;
 
 public class Movie {
-	private int id;
+	private int id = 1;
 	private String title;
 	
-	public Movie(int id, String title) {
+	public Movie(String title) {
 		setId(id);
 		setTitle(title);
 	}
@@ -14,7 +14,7 @@ public class Movie {
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.id++;
 	}
 	
 	public String getTitle() {
