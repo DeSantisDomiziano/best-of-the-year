@@ -1,7 +1,10 @@
 package org.java.bestoftheyear.controller;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.java.bestoftheyear.model.Movie;
 import org.java.bestoftheyear.model.Song;
 import org.springframework.stereotype.Controller;
@@ -31,6 +34,15 @@ public class MainController {
 		return "movie";
 	}
 	
+	
+	@GetMapping("/movies/{id}")
+    public String getMovieDetails(@PathVariable int id, Model model) {
+			Movie movie = findMovieById(id);
+        
+            model.addAttribute("movie", movie);
+            return "single-movie";
+    }
+	
 	@GetMapping("/song")
 	public String song(Model model) {
 		
@@ -44,9 +56,11 @@ public class MainController {
 	private List<Movie> getBestMovies() {
 		List<Movie> movies = new ArrayList<>();
 		
-		for(int i = 1; i < 6; i++) {
-			movies.add(new Movie("Movie " + i));
-		}
+		
+			movies.add(new Movie("Movie 1",1));
+			movies.add(new Movie("Movie 2",2));
+			movies.add(new Movie("Movie 3",3));
+		
 		
 		return movies;
 	}
@@ -60,4 +74,14 @@ public class MainController {
 		
 		return songs;
 	}
+	
+	private Movie findMovieById(int id) {
+	    List<Movie> movies = getBestMovies();
+	    
+	    Movie filteredMovies = movies.stream()
+	                 .filter(movie -> movie.getId() == id)
+	                 .toList().get(0);
+	    return filteredMovies;
+	}
+	
 }
