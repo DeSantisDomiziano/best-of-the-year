@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}">
 </head>
 <body>
-    <div th:each="song : ${songs}">
-    	<p th:text="${song.title}"></p>
-    	<a th:text="${song.id}" th:href="'http://localhost:8080/songs/' + ${song.id}"></a>
-	</div>
+    <div th:replace="frags :: header"></div>
+    <div th:replace="frags :: main_obj(${songs}, songs)"></div>
 </body>
 </html>
