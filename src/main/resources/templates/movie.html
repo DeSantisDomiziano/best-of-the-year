@@ -8,7 +8,7 @@
 <body>
     <div th:each="movie : ${movies}">
     	<p th:text="${movie.title}"></p>
-    	<p th:text="${movie.id}"></p>
+    	<a th:text="${movie.id}" th:href="'http://localhost:8080/movies/' + ${movie.id}"></a>
 	</div>
 </body>
 </html>
