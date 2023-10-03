@@ -1,10 +1,10 @@
 package org.java.bestoftheyear.model;
 
 public class Song {
-	private int id = 1;
+	private int id;
 	private String title;
 	
-	public Song(String title) {
+	public Song(int id, String title) {
 		setId(id);
 		setTitle(title);
 	}
@@ -14,7 +14,7 @@ public class Song {
 	}
 
 	public void setId(int id) {
-		this.id++;
+		this.id = id;
 	}
 	
 	public String getTitle() {

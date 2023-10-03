@@ -34,13 +34,20 @@ public class MainController {
 		return "movie";
 	}
 	
-	
 	@GetMapping("/movies/{id}")
     public String getMovieDetails(@PathVariable int id, Model model) {
 			Movie movie = findMovieById(id);
         
             model.addAttribute("movie", movie);
             return "single-movie";
+    }
+	
+	@GetMapping("/songs/{id}")
+    public String getSongDetalis(@PathVariable int id, Model model) {
+			Song song = findSongById(id);
+        
+            model.addAttribute("song", song);
+            return "single-song";
     }
 	
 	@GetMapping("/song")
@@ -56,21 +63,19 @@ public class MainController {
 	private List<Movie> getBestMovies() {
 		List<Movie> movies = new ArrayList<>();
 		
-		
 			movies.add(new Movie("Movie 1",1));
 			movies.add(new Movie("Movie 2",2));
 			movies.add(new Movie("Movie 3",3));
-		
-		
+			
 		return movies;
 	}
 	
 	private List<Song> getBestSongs() {
 		List<Song> songs = new ArrayList<>();
 		
-		for(int i = 1; i < 6; i++) {
-			songs.add(new Song("Song" + i));
-		}
+		songs.add(new Song(1,"Song 1"));
+		songs.add(new Song(2,"Song 2"));
+		songs.add(new Song(3,"Song 3"));
 		
 		return songs;
 	}
@@ -82,6 +87,15 @@ public class MainController {
 	                 .filter(movie -> movie.getId() == id)
 	                 .toList().get(0);
 	    return filteredMovies;
+	}
+	
+	private Song findSongById(int id) {
+	    List<Song> songs = getBestSongs();
+	    
+	    Song filteredSongs = songs.stream()
+	                 .filter(song -> song.getId() == id)
+	                 .toList().get(0);
+	    return filteredSongs;
 	}
 	
 }
